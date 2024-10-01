@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link href="dist/output.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payments and Expenses Tracker</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Optional: Add custom styles if needed */
+   <style>
     </style>
 </head>
 <body>
+	<div id="entryPoint"></div>
+
   <main></main>
-  <script>
-    var app = Elm.Main.init({ node: document.querySelector('main') })
-    // you can use ports and stuff here
+  <script src="main.js"></script>
+  <script type="text/javascript">
+	  var app = Elm.Main.init({
+		  node: document.getElementById("entryPoint")
+	  })
   </script>
 </body>
 </html>
-
