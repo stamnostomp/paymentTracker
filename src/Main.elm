@@ -67,15 +67,15 @@ view : Model -> Html Msg
 view model =
     case model.viewPage of
         MainPage ->
-            div [ class "max-w-lg mx-auto p-4" ]
-                [ h1 [ class "text-2xl font-bold mb-4" ] [ text ("Payments - Total: $" ++ String.fromFloat (total model)) ]
-                , div [ class "text-xl mb-4" ] [ text ("Total Payments This Month: $" ++ String.fromFloat (totalPaymentsThisMonth model)) ]
+            div [ class "max-w-lg mx-auto p-4 bg-everblush-bg text-everblush-text" ]
+                [ h1 [ class "text-2xl font-bold mb-4 text-everblush-primary" ] [ text ("Payments - Total: $" ++ String.fromFloat (total model)) ]
+                , div [ class "text-xl mb-4 text-everblush-text" ] [ text ("Total Payments This Month: $" ++ String.fromFloat (totalPaymentsThisMonth model)) ]
                 , filterButtons model
-                , button [ onClick TogglePaymentInputs, class "bg-blue-500 text-white px-4 py-2 rounded mt-4" ] [ text "Add Payment" ]
+                , button [ onClick TogglePaymentInputs, class "bg-everblush-primary text-everblush-white px-4 py-2 rounded mt-4" ] [ text "Add Payment" ]
                 , viewPaymentInputs model
-                , button [ onClick ToggleExpenseInputs, class "bg-red-500 text-white px-4 py-2 rounded mt-4" ] [ text "Add Expense" ]
+                , button [ onClick ToggleExpenseInputs, class "bg-everblush-red text-everblush-white px-4 py-2 rounded mt-4" ] [ text "Add Expense" ]
                 , viewExpenseInputs model
-                , button [ onClick (NavigateTo StatsPage), class "bg-green-500 text-white px-4 py-2 rounded mt-4" ] [ text "View Stats" ]
+                , button [ onClick (NavigateTo StatsPage), class "bg-everblush-accent text-everblush-white px-4 py-2 rounded mt-4" ] [ text "View Stats" ]
                 , ul [ class "mt-4" ] (viewFiltered model)
                 ]
 
@@ -85,7 +85,7 @@ view model =
 filterButtons : Model -> Html Msg
 filterButtons model =
     div [ class "mb-4" ]
-        [ select [ onInput SetViewMode, class "border border-gray-300 p-2 rounded" ]
+        [ select [ onInput SetViewMode, class "border border-everblush-white p-2 rounded bg-everblush-bg text-everblush-text" ]
             [ option [ value "both" ] [ text "Show Both" ]
             , option [ value "payments" ] [ text "Show Payments" ]
             , option [ value "expenses" ] [ text "Show Expenses" ]
@@ -100,9 +100,9 @@ viewPaymentInputs model =
                 [ placeholder "Payment Amount"
                 , value model.currentAmount
                 , onInput UpdateAmount
-                , class "border border-gray-300 p-2 rounded w-full"
+                , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text"
                 ] []
-            , button [ onClick AddPayment, class "bg-blue-500 text-white px-4 py-2 rounded mt-2" ] [ text "Submit Payment" ]
+            , button [ onClick AddPayment, class "bg-everblush-primary text-everblush-white px-4 py-2 rounded mt-2" ] [ text "Submit Payment" ]
             ]
     else
         text ""
@@ -115,15 +115,15 @@ viewExpenseInputs model =
                 [ placeholder "Expense Description"
                 , value model.currentExpenseDescription
                 , onInput UpdateExpenseDescription
-                , class "border border-gray-300 p-2 rounded w-full mb-2"
+                , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text mb-2"
                 ] []
             , input
                 [ placeholder "Expense Amount"
                 , value model.currentExpenseAmount
                 , onInput UpdateExpenseAmount
-                , class "border border-gray-300 p-2 rounded w-full mb-2"
+                , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text mb-2"
                 ] []
-            , button [ onClick AddExpense, class "bg-red-500 text-white px-4 py-2 rounded mt-2" ] [ text "Submit Expense" ]
+            , button [ onClick AddExpense, class "bg-everblush-red text-everblush-white px-4 py-2 rounded mt-2" ] [ text "Submit Expense" ]
             ]
     else
         text ""
@@ -147,35 +147,35 @@ viewPayment model payment =
             Just (id, "payment") -> id == payment.id
             _ -> False
     in
-    li [ class "border-b py-2" ]
+    li [ class "border-b py-2 text-everblush-text" ]
         [ if isEditing then
             div []
                 [ input
                     [ placeholder "Edit Payment Description"
                     , value payment.description
                     , onInput (UpdateEditDescription payment.id)
-                    , class "border border-gray-300 p-2 rounded w-full mb-2"
+                    , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text mb-2"
                     ] []
                 , input
                     [ placeholder "Edit Payment Amount"
                     , value (String.fromFloat payment.amount)
                     , onInput (UpdateEditAmount payment.id)
-                    , class "border border-gray-300 p-2 rounded w-full mb-2"
+                    , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text mb-2"
                     ] []
                 , input
                     [ placeholder "Edit Payment Date"
                     , value model.currentEditDate
                     , onInput (UpdateEditDate payment.id)
-                    , class "border border-gray-300 p-2 rounded w-full mb-2"
+                    , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text mb-2"
                     ] []
-                , button [ onClick (SaveEdit payment.id), class "bg-green-500 text-white px-4 py-2 rounded mt-2" ] [ text "Save" ]
-                , button [ onClick (CancelEdit payment.id), class "bg-gray-500 text-white px-4 py-2 rounded mt-2 ml-2" ] [ text "Cancel" ]
-                , button [ onClick (DeleteEntry (payment.id, "payment")), class "bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2" ] [ text "Delete" ]
+                , button [ onClick (SaveEdit payment.id), class "bg-everblush-primary text-everblush-white px-4 py-2 rounded mt-2" ] [ text "Save" ]
+                , button [ onClick (CancelEdit payment.id), class "bg-everblush-accent text-everblush-white px-4 py-2 rounded mt-2 ml-2" ] [ text "Cancel" ]
+                , button [ onClick (DeleteEntry (payment.id, "payment")), class "bg-everblush-red text-everblush-white px-4 py-2 rounded mt-2 ml-2" ] [ text "Delete" ]
                 ]
           else
             div [ class "flex justify-between" ]
                 [ text (payment.description ++ ": $" ++ String.fromFloat payment.amount ++ " on " ++ payment.date)
-                , button [ onClick (EditEntry (payment.id, "payment")), class "bg-blue-500 text-white px-4 py-2 rounded" ] [ text "Edit" ]
+                , button [ onClick (EditEntry (payment.id, "payment")), class "bg-everblush-primary text-everblush-white px-4 py-2 rounded" ] [ text "Edit" ]
                 ]
         ]
 
@@ -186,55 +186,52 @@ viewExpense model expense =
             Just (id, "expense") -> id == expense.id
             _ -> False
     in
-    li [ class "border-b py-2" ]
+    li [ class "border-b py-2 text-everblush-text" ]
         [ if isEditing then
             div []
                 [ input
                     [ placeholder "Edit Expense Description"
                     , value expense.description
                     , onInput (UpdateEditDescription expense.id)
-                    , class "border border-gray-300 p-2 rounded w-full mb-2"
+                    , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text mb-2"
                     ] []
                 , input
                     [ placeholder "Edit Expense Amount"
                     , value (String.fromFloat expense.amount)
                     , onInput (UpdateEditAmount expense.id)
-                    , class "border border-gray-300 p-2 rounded w-full mb-2"
+                    , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text mb-2"
                     ] []
                 , input
                     [ placeholder "Edit Expense Date"
                     , value model.currentEditDate
                     , onInput (UpdateEditDate expense.id)
-                    , class "border border-gray-300 p-2 rounded w-full mb-2"
+                    , class "border border-everblush-white p-2 rounded w-full bg-everblush-bg text-everblush-text mb-2"
                     ] []
-                , button [ onClick (SaveEdit expense.id), class "bg-green-500 text-white px-4 py-2 rounded mt-2" ] [ text "Save" ]
-                , button [ onClick (CancelEdit expense.id), class "bg-gray-500 text-white px-4 py-2 rounded mt-2 ml-2" ] [ text "Cancel" ]
-                , button [ onClick (DeleteEntry (expense.id, "expense")), class "bg-red-500 text-white px-4 py-2 rounded mt-2 ml-2" ] [ text "Delete" ]
+                , button [ onClick (SaveEdit expense.id), class "bg-everblush-primary text-everblush-white px-4 py-2 rounded mt-2" ] [ text "Save" ]
+                , button [ onClick (CancelEdit expense.id), class "bg-everblush-accent text-everblush-white px-4 py-2 rounded mt-2 ml-2" ] [ text "Cancel" ]
+                , button [ onClick (DeleteEntry (expense.id, "expense")), class "bg-everblush-red text-everblush-white px-4 py-2 rounded mt-2 ml-2" ] [ text "Delete" ]
                 ]
           else
             div [ class "flex justify-between" ]
-                [ text (expense.description ++ ": -$" ++ String.fromFloat expense.amount ++ " on " ++ expense.date)
-                , button [ onClick (EditEntry (expense.id, "expense")), class "bg-blue-500 text-white px-4 py-2 rounded" ] [ text "Edit" ]
+                [ text (expense.description ++ ": $" ++ String.fromFloat expense.amount ++ " on " ++ expense.date)
+                , button [ onClick (EditEntry (expense.id, "expense")), class "bg-everblush-primary text-everblush-white px-4 py-2 rounded" ] [ text "Edit" ]
                 ]
         ]
-
--- VIEW STATS
 
 viewStats : Model -> Html Msg
 viewStats model =
     let
-        target = 3500
-        totalPayments = sum (List.map .amount model.payments)
+        totalPayments = total model
         averageWeeklyPayment = totalPayments / 4
+        target = 500.0
     in
-    div [ class "max-w-lg mx-auto p-4" ]
-        [ h1 [ class "text-2xl font-bold mb-4" ] [ text "Stats" ]
-        , div [ class "text-xl mb-4" ] [ text ("Total Payments: $" ++ String.fromFloat totalPayments) ]
-        , div [ class "text-xl mb-4" ] [ text ("Average Weekly Payment: $" ++ String.fromFloat averageWeeklyPayment) ]
-        , div [ class "text-xl mb-4" ] [ text ("Target: $" ++ String.fromFloat target) ]
-        , button [ onClick (NavigateTo MainPage), class "bg-blue-500 text-white px-4 py-2 rounded mt-4" ] [ text "Back to Main" ]
+    div [ class "max-w-lg mx-auto p-4 bg-everblush-bg text-everblush-text" ]
+        [ h1 [ class "text-2xl font-bold mb-4 text-everblush-primary" ] [ text "Stats" ]
+        , div [ class "text-xl mb-4 text-everblush-text" ] [ text ("Total Payments: $" ++ String.fromFloat totalPayments) ]
+        , div [ class "text-xl mb-4 text-everblush-text" ] [ text ("Average Weekly Payment: $" ++ String.fromFloat averageWeeklyPayment) ]
+        , div [ class "text-xl mb-4 text-everblush-text" ] [ text ("Target: $" ++ String.fromFloat target) ]
+        , button [ onClick (NavigateTo MainPage), class "bg-everblush-primary text-everblush-white px-4 py-2 rounded mt-4" ] [ text "Back to Main" ]
         ]
-
 
 -- UPDATE
 
