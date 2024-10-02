@@ -7,6 +7,8 @@ import Html.Events exposing (onClick, onInput)
 import List exposing (sum)
 import Time exposing (Posix, millisToPosix, posixToMillis, now)
 import Task exposing (Task)
+import Http
+import Json.Encode as Encode exposing (object, float, string)
 
 -- MODEL
 
